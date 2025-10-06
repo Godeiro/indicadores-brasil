@@ -1,7 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Toggle } from "@/components/ui/toggle";
+// 🔧 Componentes locais (substituem shadcn/ui para build na Vercel sem alias "@/")
+const Card = ({ className = "", children }) => (
+  <div className={`rounded-xl border bg-white shadow ${className}`}>{children}</div>
+);
+const CardContent = ({ className = "", children }) => (
+  <div className={className}>{children}</div>
+);
+const Button = ({ className = "", children, ...props }) => (
+  <button className={`px-3 py-2 border rounded-md hover:opacity-90 active:opacity-80 ${className}`} {...props}>{children}</button>
+);
+const Toggle = ({ pressed, onPressedChange, children }) => (
+  <button
+    aria-pressed={pressed}
+    onClick={() => onPressedChange && onPressedChange(!pressed)}
+    className={`px-3 py-2 border rounded-md ${pressed ? "bg-gray-900 text-white" : "bg-white"}`}
+  >
+    {children}
+  </button>
+);
 import { Loader2, Map, RefreshCw, ZoomIn, ZoomOut, Accessibility, MousePointerClick } from "lucide-react";
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from "react-simple-maps";
 
